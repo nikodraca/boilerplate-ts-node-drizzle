@@ -18,19 +18,21 @@ export class SongEvents extends BaseEvents {
         type: 'song:submit',
         eventHandler: ({ spotifyUri }) => {
           this.socket.rooms.forEach((roomId: string) => {
-            console.log(roomId);
+            console.log({ roomId, spotifyUri });
             this.io.to(roomId).emit('song:request', { spotifyUri });
           });
         },
       },
       {
         type: 'song:request',
-        eventHandler: () => {},
+        eventHandler: () => {
+          console.log('song:request');
+        },
       },
       {
         type: 'song:play',
-        eventHandler: async ({ spotifyUri, accessToken }) => {
-          await this.spotifyService.startUserPlayback(spotifyUri, accessToken);
+        eventHandler: async ({ spotifyUri, accessToken, deviceId }) => {
+          await this.spotifyService.startUserPlayback(spotifyUri, accessToken, deviceId);
         },
       },
     ];

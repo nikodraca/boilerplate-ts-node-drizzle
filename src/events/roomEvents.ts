@@ -13,7 +13,7 @@ export class RoomEvents extends BaseEvents {
       {
         type: 'room:join',
         eventHandler: ({ roomId }) => {
-          console.log({ roomId });
+          console.log(`Joined room: ${roomId}`);
           this.socket.join(roomId);
         },
       },

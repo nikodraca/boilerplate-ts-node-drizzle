@@ -7,7 +7,7 @@ export class SpotifyService {
     this.spotifyGateway = spotifyGateway;
   }
 
-  async startUserPlayback(spotifyUri: string, accessToken: string) {
-    this.spotifyGateway.startUserPlayback(spotifyUri, accessToken);
+  async startUserPlayback(spotifyUri: string, accessToken: string, deviceId: string) {
+    this.spotifyGateway.startUserPlayback(spotifyUri, accessToken, deviceId);
   }
 }

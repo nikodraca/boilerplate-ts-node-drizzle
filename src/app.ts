@@ -6,10 +6,17 @@ import cors from 'cors';
 
 import config from './config';
 import { RoomEvents, SongEvents } from './events';
-import { SpotifyService } from './services';
+import { RoomService, SpotifyService } from './services';
 import { SpotifyGateway } from './gateways';
+import { RoomController } from './controllers';
 
 export const start = () => {
+  const spotifyGateway = new SpotifyGateway();
+  const spotifyService = new SpotifyService(spotifyGateway);
+
+  const roomService = new RoomService();
+  const roomController = new RoomController(roomService);
+
   const server = express()
     .use(
       cors({
@@ -25,12 +32,10 @@ export const start = () => {
       })
     )
     .use(express.json())
+    .use('/room', roomController.routes())
     .listen(config.port, () => console.log(`Listening on ${config.port}`));
 
   const io = new SocketIO.Server(server);
-
-  const spotifyGateway = new SpotifyGateway();
-  const spotifyService = new SpotifyService(spotifyGateway);
 
   io.on('connection', (socket) => {
     const roomEvents = new RoomEvents(io, socket);
