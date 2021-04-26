@@ -4,14 +4,23 @@
   "main": "index.ts",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^2.20.1",
+    "@types/uuid": "^8.3.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "inversify": "5.1.1",
+    "inversify-express-utils": "^6.3.2",
+    "inversify-socket-utils": "^1.0.3",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
+    "prisma": "^2.20.1",
+    "reflect-metadata": "^0.1.13",
     "socket.io": "^3.1.1",
-    "ts-node": "^9.1.1"
+    "ts-node": "^9.1.1",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",

@@ -1,1 +1,1 @@
-export { SpotifyGateway } from './spotifyGateway';
+export { SpotifyGateway } from './SpotifyGateway';

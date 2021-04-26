@@ -1,26 +1,31 @@
-import { Socket, Server } from 'socket.io';
+import { inject, injectable, named } from 'inversify';
+import { ConnectedSocket, Controller, OnConnect, OnDisconnect, OnMessage, Payload } from 'inversify-socket-utils';
+import 'reflect-metadata';
 
-import { Event } from './types';
-import { BaseEvents } from './baseEvents';
+import { RoomService } from '../services';
 
-export class RoomEvents extends BaseEvents {
-  constructor(io: Server, socket: Socket) {
-    super(io, socket);
+@injectable()
+@Controller('/')
+export class RoomEvents {
+  constructor(
+    @inject('service')
+    @named('room')
+    private roomService: RoomService
+  ) {}
+
+  @OnConnect('connection')
+  connection() {
+    console.log('Client connected');
   }
 
-  init() {
-    const events: Array<Event> = [
-      {
-        type: 'room:join',
-        eventHandler: ({ roomId }) => {
-          console.log(`Joined room: ${roomId}`);
-          this.socket.join(roomId);
-        },
-      },
-    ];
+  @OnDisconnect('disconnect')
+  disconnect() {
+    console.log('Client disconnected');
+  }
 
-    events.forEach((event) => {
-      this.attachEvent(event);
-    });
+  @OnMessage('room:join')
+  message(@Payload() payload: any, @ConnectedSocket() socket: any) {
+    console.log('Message received', payload);
+    // socket.emit('message', 'Hello!');
   }
 }
