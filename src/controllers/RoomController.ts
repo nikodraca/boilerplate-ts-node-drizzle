@@ -1,27 +1,31 @@
-import express from 'express';
+import 'reflect-metadata';
+
+import { inject, named } from 'inversify';
+import { controller, httpGet } from 'inversify-express-utils';
+import { Request, Response } from 'express';
+
+import { BaseController } from './BaseController';
 import { RoomService } from '../services';
 
-export class RoomController {
-  private router: express.Router;
-  private roomService: RoomService;
-
-  constructor(roomService: RoomService) {
-    this.roomService = roomService;
-    this.router = express.Router({ mergeParams: true });
+@controller('/room')
+export class RoomController extends BaseController {
+  constructor(
+    @inject('service')
+    @named('room')
+    private roomService: RoomService
+  ) {
+    super();
   }
 
-  private listRoutes(req: express.Request, res: express.Response) {
-    res.json([
-      {
-        id: 'cool-room',
-        title: 'Cool Room',
-      },
-    ]);
-  }
+  @httpGet('/')
+  public async listRooms(req: Request, res: Response) {
+    try {
+      const { limit, offset } = req.query;
+      const data = await this.roomService.listRooms(limit ? +limit : 30, offset ? +offset : 0);
 
-  routes() {
-    this.router.get('/', this.listRoutes);
-
-    return this.router;
+      res.status(200).json(data);
+    } catch (e) {
+      this.handleError(req, res, e);
+    }
   }
 }

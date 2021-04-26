@@ -1,2 +1,3 @@
-export { RoomEvents } from './roomEvents';
-export { SongEvents } from './songEvents';
+export { RoomEvents } from './RoomEvents';
+
+// export { SongEvents } from './songEvents';
