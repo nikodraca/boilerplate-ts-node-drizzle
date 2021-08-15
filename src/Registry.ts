@@ -4,10 +4,10 @@ import { Interfaces, TYPE } from 'inversify-socket-utils';
 
 import config from './config';
 
-import { RoomController, UserController } from './controllers';
 import { RoomService } from './services';
 import { RoomRepository } from './repositories';
 import { RoomEvents } from './events';
+import { RoomController } from './controllers';
 
 const registry = new Container();
 
@@ -31,7 +31,6 @@ registry.bind<RoomRepository>('repository').to(RoomRepository).inSingletonScope(
 
 // ROUTE CONTROLLERS
 registry.bind<RoomController>('route').to(RoomController).inSingletonScope().whenTargetNamed('room');
-registry.bind<UserController>('route').to(UserController).inSingletonScope().whenTargetNamed('user');
 
 // EVENTS
 registry.bind<Interfaces.Controller>(TYPE.Controller).to(RoomEvents);
