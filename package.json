@@ -4,7 +4,7 @@
   "main": "index.ts",
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^2.20.1",
+    "@prisma/client": "^3.8.0-dev.27",
     "@types/uuid": "^8.3.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
@@ -23,6 +23,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@prisma/cli": "^2.16.0-dev.68",
     "@types/express": "^4.17.11",
     "@types/morgan": "^1.9.2"
   },
