@@ -15,6 +15,7 @@
     "inversify-socket-utils": "^1.0.3",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
+    "prettier": "^2.5.1",
     "prisma": "^2.20.1",
     "reflect-metadata": "^0.1.13",
     "socket.io": "^3.1.1",
