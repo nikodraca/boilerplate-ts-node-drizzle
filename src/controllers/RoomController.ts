@@ -24,8 +24,8 @@ export class RoomController extends BaseController {
       const data = await this.roomService.listRooms(limit ? +limit : 30, offset ? +offset : 0);
 
       res.status(200).json(data);
-    } catch (e) {
-      this.handleError(req, res, e);
+    } catch (e: unknown) {
+      this.handleError(req, res, e as Error);
     }
   }
 }
