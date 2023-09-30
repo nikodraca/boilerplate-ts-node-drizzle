@@ -39,7 +39,7 @@
     "dev": "NODE_ENV=development nodemon -L --exec 'ts-node --project tsconfig.json' src/index.ts",
     "build": "tsc --project tsconfig.json",
     "start": "node ./dist/index.js",
-    "format": "prettier --check --config .prettierrc .",
-    "format:write": "prettier --write --config .prettierrc ."
+    "format": "prettier --write --config .prettierrc .",
+    "format:check": "prettier --check --config .prettierrc ."
   }
 }
