@@ -7,4 +7,7 @@ This is a boilerplate project using `InversifyExpressServer` and `InversifySocke
 ## Getting Started
 
 1. `yarn` to install dependencies
-2. `yarn prisma generate` to set up db
+2. Create database with `createdb :DATABASE_NAME`
+3. Create `.env.development` file from the `.env.template` and update values
+4. Run `yarn db:generate` to create migration files
+5. Run `yarn db:migrate` to run migrations

@@ -1,15 +1,18 @@
-import { PrismaClient } from '@prisma/client';
+import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { injectable, inject, named } from 'inversify';
+
+import * as schema from '../../db/schema';
 
 @injectable()
 export class RoomRepository {
-  constructor(@inject('connection') @named('prisma') private client: PrismaClient) {}
+  constructor(
+    @inject('connection') @named('prisma') private client: PostgresJsDatabase<typeof schema>
+  ) {}
 
   public async listRooms(limit: number, offset: number) {
-    return [{ id: 'cool-room', title: 'Cool Room' }];
-    // return this.client.room.findMany({
-    //   skip: offset,
-    //   take: limit,
-    // });
+    return await this.client.query.room.findMany({
+      limit,
+      offset
+    });
   }
 }

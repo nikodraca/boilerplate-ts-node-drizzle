@@ -3,6 +3,7 @@ export default {
   logLevel: process.env.LOG_LEVEL || 5,
   port: process.env.PORT || 3000,
   db: {
-    url: process.env.DATABASE_URL,
-  },
+    url:
+      process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/boilerplate-test'
+  }
 };

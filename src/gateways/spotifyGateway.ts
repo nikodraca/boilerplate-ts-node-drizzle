@@ -6,7 +6,7 @@ export class SpotifyGateway {
   constructor() {
     this.gateway = axios.create({
       baseURL: 'https://api.spotify.com',
-      timeout: 3 * 1000,
+      timeout: 3 * 1000
     });
   }
 }

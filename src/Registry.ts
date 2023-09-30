@@ -1,22 +1,24 @@
 import { Container } from 'inversify';
-import { PrismaClient } from '@prisma/client';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 
-import config from './config';
-
+import * as schema from '../db/schema';
 import { RoomService } from './services';
 import { RoomRepository } from './repositories';
 import { RoomController } from './controllers';
+import config from './config';
 
 const registry = new Container();
 
+// for query purposes
+const queryClient = postgres(config.db.url);
+const db: PostgresJsDatabase<typeof schema> = drizzle(queryClient, { schema });
+
 // CONNECTIONS
 registry
-  .bind<PrismaClient>('connection')
-  .toConstantValue(
-    new PrismaClient({
-      datasources: { db: { url: config.db.url } }
-    })
-  )
+  .bind<PostgresJsDatabase<typeof schema>>('connection')
+  .toConstantValue(db)
   .whenTargetNamed('prisma');
 
 // SERVICES
