@@ -10,9 +10,13 @@ export class RoomRepository {
   ) {}
 
   public async listRooms(limit: number, offset: number) {
-    return await this.client.query.room.findMany({
+    return this.client.query.room.findMany({
       limit,
       offset
     });
+  }
+
+  public async createRoom(createRoomArgs: schema.NewRoom) {
+    return this.client.insert(schema.room).values(createRoomArgs).returning();
   }
 }

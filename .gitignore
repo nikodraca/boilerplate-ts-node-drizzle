@@ -5,3 +5,7 @@ node_modules/*
 # Secrets
 .env.**
 !.env.template
+
+# Database
+# You want to check these into the cloned project, so remove this once cloned
+db/migrations
