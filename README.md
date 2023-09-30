@@ -1,4 +1,4 @@
-# boilerplate-ts-socket
+# boilerplate-ts-node-drizzle
 
 ## Description
 
