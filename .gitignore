@@ -9,3 +9,4 @@ node_modules/*
 # Database
 # You want to check these into the cloned project, so remove this once cloned
 db/migrations
+**/.DS_Store
